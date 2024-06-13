@@ -1,6 +1,6 @@
 const db = require("../models");
 const Course = db.Course;
-const User = db.User;
+const { Op } = require("sequelize");
 
 const getCourses = async (req, res) => {
   try {
@@ -20,6 +20,37 @@ const getCourseById = async (req, res) => {
     res.json(course);
   } catch (err) {
     res.status(400).json({ error: err.message });
+  }
+};
+
+const getAllCourses = async (req, res) => {
+  try {
+    const { page = 1, limit = 10, search = "", createdBy } = req.query;
+
+    const whereClause = {
+      title: {
+        [Op.like]: `%${search}%`,
+      },
+    };
+
+    if (createdBy) {
+      whereClause.created_by = createdBy;
+    }
+
+    const courses = await Course.findAndCountAll({
+      where: whereClause,
+      limit: parseInt(limit),
+      offset: (page - 1) * limit,
+    });
+
+    res.json({
+      totalItems: courses.count,
+      totalPages: Math.ceil(courses.count / limit),
+      currentPage: parseInt(page),
+      courses: courses.rows,
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 };
 
@@ -74,8 +105,8 @@ const deleteCourse = async (req, res) => {
 };
 
 module.exports = {
-  getCourses,
   getCourseById,
+  getAllCourses,
   createCourse,
   updateCourse,
   deleteCourse,
