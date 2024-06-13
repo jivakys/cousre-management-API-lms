@@ -32,6 +32,12 @@ The Course Management System API is a RESTful API designed for managing courses 
 - **Sequelize**: ORM for MySQL and other relational databases
 - **bcryptjs**: Library to hash passwords
 
+## Swagger API Documentation
+### Runs the project in the development mode
+[http://localhost:7000](http://localhost:7000)
+
+### Swagger API Link
+[API Check here](http://localhost:7000/api-docs/)
   
 ## API Endpoints
 ### Authentication
@@ -60,7 +66,7 @@ The Course Management System API is a RESTful API designed for managing courses 
 - Authorization middleware ensures only authenticated users can access protected routes.
 
 ## Environment Variables
-PORT=3000
+PORT=your_port_number
 DB_HOST=localhost
 DB_USER=root
 DB_PASSWORD=yourpassword
