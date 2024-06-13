@@ -39,8 +39,13 @@ The Course Management System API is a RESTful API designed for managing courses 
 - `POST /api/login`: Authenticate a user and provide a token
 
 ### Course Management
-- `GET /api/courses`: Retrieve a list of all courses
 - `GET /api/courses/:id`: Retrieve details of a specific course
+- `GET api/courses`: Retrieve a list of all courses with optional search, filter, and pagination.
+  - Query Parameters:
+    - `search`: Search term to filter courses by title.
+    - `filter`: filters by createdBy(implement as needed).
+    - `page`: Page number for pagination.
+    - `limit`: Number of courses per page.
 - `POST /api/courses`: Create a new course (teachers only)
 - `PUT /api/courses/:id`: Update a course (teachers only)
 - `DELETE /api/courses/:id`: Delete a course (teachers only)
@@ -59,7 +64,7 @@ PORT=3000
 DB_HOST=localhost
 DB_USER=root
 DB_PASSWORD=yourpassword
-DB_NAME=course_management
+DB_NAME=your_db_name
 JWT_SECRET=yourjwtsecret
 
 
