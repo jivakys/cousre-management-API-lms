@@ -1,15 +1,11 @@
 const express = require("express");
 const progressRouter = express.Router();
-const progressController = require("../controllers/progressController");
+const progressController = require("../controllers/progressControllers");
 const auth = require("../middleware/auth");
 
-progressRouter.get(
-  "/users/:id/progress",
-  auth,
-  progressController.getUserProgress
-);
+progressRouter.get("/progress/:id", auth, progressController.getUserProgress);
 progressRouter.post(
-  "/users/:id/progress",
+  "/progress/:id",
   auth,
   progressController.updateUserProgress
 );

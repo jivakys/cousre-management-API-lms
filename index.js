@@ -7,11 +7,11 @@ const app = express();
 app.use(express.json());
 const authRoutes = require("./routes/authRoutes");
 const courseRoutes = require("./routes/courseRoutes");
-// const progressRoutes = require("./routes/progressRoutes");
+const progressRoutes = require("./routes/progressRoutes");
 
 app.use("/api", authRoutes);
 app.use("/api", courseRoutes);
-// app.use("/api", progressRoutes);
+app.use("/api", progressRoutes);
 
 const PORT = process.env.PORT || 7000;
 

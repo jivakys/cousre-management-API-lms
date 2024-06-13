@@ -19,7 +19,7 @@ const updateUserProgress = async (req, res) => {
       where: { userId: req.params.id, courseId },
     });
     if (userProgress) {
-      userProgress.progress = completed;
+      userProgress.progress = progress;
       await userProgress.save();
     } else {
       userProgress = await Progress.create({

@@ -25,8 +25,9 @@ module.exports = (sequelize) => {
           key: "courseId",
         },
       },
-      completed: {
+      progress: {
         type: DataTypes.ENUM("Initial", "In Progress", "Completed"),
+        defaultValue: "Initial",
         allowNull: false,
       },
     },

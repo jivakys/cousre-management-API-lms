@@ -31,7 +31,7 @@ const login = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "2h" }
     );
-    res.json({ token });
+    res.json({ token, message: "User logged in successfully" });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }

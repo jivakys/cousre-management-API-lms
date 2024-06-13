@@ -5,7 +5,7 @@ const User = db.User;
 const getCourses = async (req, res) => {
   try {
     const courses = await Course.findAll();
-    res.json(courses);
+    res.json({ List_Of_All_Courses: courses });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -67,7 +67,7 @@ const deleteCourse = async (req, res) => {
       return res.status(403).json({ message: "Access denied" });
     }
     await course.destroy();
-    res.status(204).send();
+    res.status(204).send("Course Deleted Successfully.");
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
