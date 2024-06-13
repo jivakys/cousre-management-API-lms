@@ -8,6 +8,7 @@ progressRouter.get(
   auth,
   progressController.getUserProgress
 );
+
 progressRouter.post(
   "/users/:id/progress",
   auth,
