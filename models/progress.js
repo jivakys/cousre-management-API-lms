@@ -1,40 +1,44 @@
 const { DataTypes } = require("sequelize");
-const sequelize = require("./index").sequelize;
-const User = require("./user");
-const Course = require("./course");
 
-const Progress = sequelize.define(
-  "Progress",
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-    userId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: User,
-        key: "userId",
+module.exports = (sequelize) => {
+  const Progress = sequelize.define(
+    "Progress",
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: "Users",
+          key: "userId",
+        },
+      },
+      courseId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: "Courses",
+          key: "courseId",
+        },
+      },
+      completed: {
+        type: DataTypes.ENUM("Initial", "In Progress", "Completed"),
+        allowNull: false,
       },
     },
-    courseId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: Course,
-        key: "courseId",
-      },
-    },
-    progress: {
-      type: DataTypes.ENUM("Initial", "In Progress", "Completed"),
-      allowNull: false,
-    },
-  },
-  {
-    timestamps: true,
-  }
-);
+    {
+      timestamps: true,
+    }
+  );
 
-module.exports = Progress;
+  Progress.associate = function (models) {
+    Progress.belongsTo(models.User, { foreignKey: "userId" });
+    Progress.belongsTo(models.Course, { foreignKey: "courseId" });
+  };
+
+  return Progress;
+};
