@@ -2,22 +2,13 @@ const db = require("../models");
 const Course = db.Course;
 const { Op } = require("sequelize");
 
-const getCourses = async (req, res) => {
-  try {
-    const courses = await Course.findAll();
-    res.json({ List_Of_All_Courses: courses });
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-};
-
 const getCourseById = async (req, res) => {
   try {
     const course = await Course.findByPk(req.params.id);
     if (!course) {
       return res.status(404).json({ message: "Course not found" });
     }
-    res.json(course);
+    res.json({ course, message: "Course Details Found" });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -65,7 +56,7 @@ const createCourse = async (req, res) => {
       description,
       created_by: req.user.id,
     });
-    res.status(201).json(course);
+    res.status(201).json({ course, message: "New Course Created" });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }

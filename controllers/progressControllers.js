@@ -28,7 +28,7 @@ const updateUserProgress = async (req, res) => {
         progress,
       });
     }
-    res.json(userProgress);
+    res.json({ userProgress, message: "User Progress updated" });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
