@@ -66,12 +66,12 @@ The Course Management System API is a RESTful API designed for managing courses 
 - Authorization middleware ensures only authenticated users can access protected routes.
 
 ## Environment Variables
-PORT=your_port_number
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=yourpassword
-DB_NAME=your_db_name
-JWT_SECRET=yourjwtsecret
+- `PORT`=your_port_number
+- `DB_HOST`=localhost
+- `DB_USER`=root
+- `DB_PASSWORD`=yourpassword
+- `DB_NAME`=your_db_name
+- `JWT_SECRET`=yourjwtsecret
 
 
 ## Contributing
